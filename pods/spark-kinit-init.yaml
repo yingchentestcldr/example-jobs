@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spark-kinit-init-test
+  namespace: dex-app-r6hggzc4
+spec:
+  containers:
+  - env:
+    - name: KINIT_CONTAINER_KEYTAB_FILE_NAME
+      value: u---00uihumisdpsp9ttp5d7-krb5-secret
+    - name: KINIT_CONTAINER_PRINCIPAL_FILE_NAME
+      value: u---00uihumisdpsp9ttp5d7-krb5-principal
+    - name: KINIT_CONTAINER_UID
+      value: "1345"
+    - name: KINIT_CONTAINER_MODE
+      value: init
+    - name: KINIT_MAX_INIT_RETRIES
+      value: "3"
+    image: docker-private.infra.cloudera.com/cloudera/dex/dex-runtime-api-kinit:1.23.0-b89
+    imagePullPolicy: IfNotPresent
+    name: spark-kinit-init
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 50m
+        memory: 100Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /krbtmp
+      name: krbtmp
+    - mountPath: /etc/krb5/krb5.keytab
+      name: krbsecret
+      readOnly: true
+    - mountPath: /etc/krb5/krb5.principal
+      name: krb5-principal
+      readOnly: true
+    - mountPath: /etc/krb5/krb5.conf
+      name: krb5-file
+      readOnly: true
+      subPath: krb5.conf
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: jfrog-dev
+  preemptionPolicy: PreemptLowerPriority
+  priority: 1000
+  priorityClassName: dex-base-zh8qwrpw-spark-driver-pc
+  restartPolicy: Never
+  schedulerName: yunikorn
+  securityContext:
+    fsGroup: 1345
+    runAsUser: 1345
+  serviceAccount: dex-app-r6hggzc4-livy-spark
+  serviceAccountName: dex-app-r6hggzc4-livy-spark
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: krbsecret
+    secret:
+      defaultMode: 420
+      secretName: u---00uihumisdpsp9ttp5d7-krb5-secret
+  - emptyDir: {}
+    name: krbtmp
+  - name: krb5-principal
+    secret:
+      defaultMode: 420
+      secretName: u---00uihumisdpsp9ttp5d7-krb5-principal
+  - configMap:
+      defaultMode: 420
+      name: clientconfigs-default-kerberos-conf
+    name: krb5-file

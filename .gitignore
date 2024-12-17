@@ -1,0 +1,11 @@
+.DS_Store
+.venv/
+.venv-341/
+__pycache__
+cde-xhu-ca.key
+cde-xhu-ca.pem
+cde-xhu-ca.srl
+*.kcloud.cloudera.com.crt
+*.kcloud.cloudera.com.csr
+*.kcloud.cloudera.com.ext
+*.kcloud.cloudera.com.key

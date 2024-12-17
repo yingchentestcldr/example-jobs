@@ -1,0 +1,32 @@
+{
+    "name": "example-iceberg",
+    "type": "spark",
+    "mounts": [
+      {
+        "resourceName": "example-jobs"
+      }
+    ],
+    "spark": {
+      "file": "src/access-logs-ETL-iceberg.py",
+      "driverMemory": "1g",
+      "driverCores": 1,
+      "executorMemory": "1g",
+      "executorCores": 1,
+      "conf": {
+        "cde.workspaceInit.enabled": "false",
+        "dex.safariEnabled": "false",
+        "spark.dynamicAllocation.maxExecutors": "50",
+        "spark.pyspark.python": "python3",
+        "spark.sql.catalog.example_jobs": "org.apache.iceberg.spark.SparkCatalog",
+        "spark.sql.catalog.example_jobs.type": "hive",
+        "spark.sql.legacy.timeParserPolicy": "LEGACY"
+      },
+      "logLevel": "INFO"
+    },
+    "retentionPolicy": "keep_indefinitely",
+    "schedule": {
+      "enabled": false,
+      "user": "cdp_xhu",
+      "start": "2024-08-12T15:43:56.140Z"
+    }
+  }

@@ -1,0 +1,9 @@
+{
+    "name": "virtual-env-1",
+    "type": "python-env",
+    "retentionPolicy": "keep_indefinitely",
+    "pythonEnv": {
+      "pythonVersion": "python3",
+      "type": "python-env"
+    }
+}

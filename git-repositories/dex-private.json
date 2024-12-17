@@ -1,0 +1,11 @@
+{
+    "name": "dex-private",
+    "hidden": false,
+    "git":
+    {
+        "repository": "https://github.infra.cloudera.com/xhu/dex-private.git",
+        "branch": "main",
+        "credential": "test-token",
+        "insecureSkipTLS": false
+    }
+}

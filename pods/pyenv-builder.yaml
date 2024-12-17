@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dex-app-95rwrgc4-resource-builder-virtual-env-1-test-1
+  namespace: dex-app-95rwrgc4
+spec:
+  containers:
+  - env:
+    - name: DEX_PYTHON_VENV_PATH
+      value: /app/dex/storage/resources/virtual-env-1/python-virtual-environment
+    - name: DEX_PYTHON_REQUIREMENTS_PATH
+      value: /app/dex/storage/resources/virtual-env-1/requirements.txt
+    - name: DEX_PYTHON_DESCRIBE_RESOURCE_URL
+      value: http://dex-app-95rwrgc4-api.dex-app-95rwrgc4.svc:9090/api/v1/resources/virtual-env-1
+    envFrom:
+    - configMapRef:
+        name: cdp-proxy-config
+        optional: true
+    image: docker-private.infra.cloudera.com/cloudera/dex/dex-runtime-python-builder:1.22.0-b207
+    imagePullPolicy: IfNotPresent
+    name: dex-app-resource-builder
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /app/dex/storage/resources/virtual-env-1
+      name: pyenv-storage-vol
+      subPath: resources/virtual-env-1
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: jfrog-dev
+  preemptionPolicy: PreemptLowerPriority
+  priority: 10000
+  priorityClassName: dex-base-p6v4jnkl-service-pc
+  restartPolicy: Never
+  schedulerName: yunikorn
+  securityContext: {}
+  serviceAccount: dex-app-95rwrgc4-resource-builder
+  serviceAccountName: dex-app-95rwrgc4-resource-builder
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: pyenv-storage-vol
+    persistentVolumeClaim:
+      claimName: dex-app-95rwrgc4-storage-pvc

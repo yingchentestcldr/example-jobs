@@ -1,0 +1,14 @@
+import os
+from pyspark.sql import SparkSession
+
+CDE_SC_HOST='sc-tfkxsc6w.cde-tk2fmm9n.dex-priv.xcu2-8y8x.dev.cldr.work'
+CDE_TOKEN='eyJqa3UiOiJodHRwczpcL1wvc2VydmljZS5jZGUtdGsyZm1tOW4uZGV4LXByaXYueGN1Mi04eTh4LmRldi5jbGRyLndvcmtcL2dhdGV3YXlcL2NkcHRrblwva25veHRva2VuXC9hcGlcL3YxXC9qd2tzLmpzb24iLCJraWQiOiJjcm5peU53SVJBbHVFZ1h6T05zc2RWbjV6aVZaVXRpMmZXZnpMYUQtQUFzIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJjc3NvX3hodSIsImprdSI6Imh0dHBzOlwvXC9zZXJ2aWNlLmNkZS10azJmbW05bi5kZXgtcHJpdi54Y3UyLTh5OHguZGV2LmNsZHIud29ya1wvZ2F0ZXdheVwvY2RwdGtuXC9rbm94dG9rZW5cL2FwaVwvdjFcL2p3a3MuanNvbiIsImtpZCI6ImNybml5TndJUkFsdUVnWHpPTnNzZFZuNXppVlpVdGkyZldmekxhRC1BQXMiLCJpc3MiOiJLTk9YU1NPIiwiZXhwIjoxNzI0MjYwNTExLCJtYW5hZ2VkLnRva2VuIjoiZmFsc2UiLCJrbm94LmlkIjoiZTY3NmUzYjktNzY3NC00NmZmLThiZWMtZmU2MzgzZGY4ZGZhIn0.a6paOExhXRbH4VMfyWpkesY_qmqssCi08AhV94If-D9p7zm1ae5SYxMJ2YIYYU0KoHMJhIQ9v9H2BJe0v-kKEl3T7BUmwRfbYd88YAoqdVQr5p_FrhKiAVptobg5Z1-dPZOvRKcnnBEVLPJVwINlpwI5OkuFw7EuMY719f2giKet8_dpN350AMe9nInRc-pys5EDn1gDltqnbgCWLhexRMnoZrHSIpMfGQZE5-F87ongKuS6wt_Cy1j7q8uTKuQVVNWweASdN9T8xR-QiXNMaDgAtiCLV94lECC3WlSAuH_EQbocmF7cYsoKbsQDxEbI4F9DH65D-umhI-M8ia9NaA'
+remote = "sc://{}:443/;use_ssl=true;x-cde-session-name=test-session;token={}".format(CDE_SC_HOST, CDE_TOKEN)
+
+def spark_connect():
+    spark = SparkSession.builder.remote(remote).getOrCreate()
+    assert os.environ['GRPC_DEFAULT_SSL_ROOTS_FILE_PATH'] == '/Users/xhu/Documents/Cloudera/ComputePlatform/dex-example-jobs/.venv/lib/python3.10/site-packages/certifi/cacert.pem'
+    assert spark.version == '3.5.1.1.23.7218.0-6'
+
+def test_spark_connect():
+    spark_connect()

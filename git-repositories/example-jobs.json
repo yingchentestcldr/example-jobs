@@ -1,0 +1,10 @@
+{
+    "name": "example-jobs",
+    "hidden": false,
+    "git":
+    {
+        "repository": "https://github.infra.cloudera.com/xhu/dex-example-jobs.git",
+        "branch": "master",
+        "insecureSkipTLS": false
+    }
+}

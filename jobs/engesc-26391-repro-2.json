@@ -1,0 +1,41 @@
+{
+    "name": "engesc-26391-repro-2",
+    "type": "spark",
+    "mounts": [
+      {
+        "resourceName": "example-jars"
+      },
+      {
+        "resourceName": "git-demo"
+      }
+    ],
+    "spark": {
+      "file": "hbase/phoenix-read.py",
+      "jars": [
+        "hbase/runtime/7.1.8/opentelemetry-api-0.12.0.jar",
+        "hbase/runtime/7.1.8/opentelemetry-context-0.12.0.jar",
+        "phoenix-client-hbase-2.4-5.1.1.7.1.8.0-801.jar",
+        "hbase/runtime/7.1.8/phoenix5-spark3-shaded-6.0.0.3.3.7180.0-274.jar"
+      ],
+      "files": [
+        "hbase/datahub-base-cluster/xhu-718/hbase-site.xml"
+      ],
+      "driverMemory": "1g",
+      "driverCores": 1,
+      "executorMemory": "1g",
+      "executorCores": 1,
+      "conf": {
+        "dex.safariEnabled": "false",
+        "spark.driver.extraClassPath": "/app/mount/hbase/datahub-base-cluster/xhu-718",
+        "spark.pyspark.python": "python3"
+      },
+      "logLevel": "INFO"
+    },
+    "retentionPolicy": "keep_indefinitely",
+    "schedule": {
+      "enabled": true,
+      "user": "cdp_xhu",
+      "cronExpression": "*/10 * * * *",
+      "start": "2024-08-17T23:14:38.935Z"
+      }
+  }

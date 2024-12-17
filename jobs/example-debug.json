@@ -1,0 +1,28 @@
+{
+    "name": "example-debug",
+    "type": "spark",
+    "mounts": [
+      {
+        "resourceName": "example-jobs"
+      }
+    ],
+    "spark": {
+      "file": "src/pyspark-debug-job.py",
+      "driverMemory": "1g",
+      "driverCores": 1,
+      "executorMemory": "1g",
+      "executorCores": 1,
+      "conf": {
+        "cde.workspaceInit.enabled": "false",
+        "dex.safariEnabled": "false",
+        "spark.dynamicAllocation.maxExecutors": "50",
+        "spark.pyspark.python": "python3"
+      },
+      "logLevel": "INFO"
+    },
+    "retentionPolicy": "keep_indefinitely",
+    "schedule": {
+      "enabled": false,
+      "user": "cdp_xhu"
+    }
+  }

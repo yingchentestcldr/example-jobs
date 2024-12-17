@@ -1,0 +1,30 @@
+{
+    "name": "example-spark-connect",
+    "type": "spark",
+    "mounts": [
+      {
+        "resourceName": "example-jobs"
+      }
+    ],
+    "spark": {
+      "file": "src/spark-connect-example.py",
+      "driverMemory": "1g",
+      "driverCores": 1,
+      "executorMemory": "1g",
+      "executorCores": 1,
+      "conf": {
+        "cde.workspaceInit.enabled": "false",
+        "dex.safariEnabled": "false",
+        "spark.dynamicAllocation.maxExecutors": "50",
+        "spark.pyspark.python": "python3",
+        "spark.sql.legacy.timeParserPolicy": "LEGACY"
+      },
+      "logLevel": "INFO"
+    },
+    "retentionPolicy": "keep_indefinitely",
+    "schedule": {
+      "enabled": false,
+      "user": "ying.chen",
+      "start": "2024-08-12T15:43:56.140Z"
+    }
+  }

@@ -1,0 +1,27 @@
+{
+    "name": "kafka-wo-batch",
+    "type": "spark",
+    "mounts": [
+      {
+        "resourceName": "example-jobs"
+      }
+    ],
+    "spark": {
+      "file": "src/hello-kafka-cde-wo.py",
+      "driverMemory": "1g",
+      "driverCores": 1,
+      "executorMemory": "1g",
+      "executorCores": 1,
+      "conf": {
+        "dex.safariEnabled": "false",
+        "spark.kafka.clusters.base-cluster.auth.bootstrap.servers": "ccycloud-1.xhu-718.root.comops.site:9093,ccycloud-3.xhu-718.root.comops.site:9093,ccycloud-2.xhu-718.root.comops.site:9093",
+        "spark.pyspark.python": "python3"
+      },
+      "logLevel": "INFO"
+    },
+    "retentionPolicy": "keep_indefinitely",
+    "schedule": {
+      "enabled": false,
+      "user": "cdp_xhu"
+    }
+  }

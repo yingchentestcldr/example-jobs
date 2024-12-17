@@ -1,0 +1,39 @@
+{
+    "name": "example-write-parquet",
+    "type": "spark",
+    "mounts": [
+      {
+        "resourceName": "example-data"
+      },
+      {
+        "resourceName": "example-jobs"
+      },
+      {
+        "resourceName": "example-files"
+      }
+    ],
+    "spark": {
+      "file": "src/spark-write-parquet.py",
+      "args": [
+        "file:///app/mount/access-logs.txt",
+        "example-data/access-logs.parquet"
+      ],
+      "driverMemory": "1g",
+      "driverCores": 1,
+      "executorMemory": "1g",
+      "executorCores": 1,
+      "conf": {
+        "cde.workspaceInit.enabled": "false",
+        "dex.safariEnabled": "false",
+        "spark.dynamicAllocation.maxExecutors": "50",
+        "spark.pyspark.python": "python3"
+      },
+      "logLevel": "INFO"
+    },
+    "retentionPolicy": "keep_indefinitely",
+    "schedule": {
+      "enabled": false,
+      "user": "cdp_xhu"
+    }
+}
+  

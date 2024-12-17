@@ -1,0 +1,26 @@
+{
+    "name": "test-session-kafka",
+    "description": "",
+    "type": "spark-connect",
+    "ttl": "8h",
+    "interactiveSpark":
+    {
+        "idleTimeout": "1h",
+        "executorCores": 1,
+        "driverCores": 1,
+        "driverMemory": "1g",
+        "executorMemory": "1g",
+        "numExecutors": 1,
+        "jars":
+        [],
+        "pyFiles":
+        [],
+        "files":
+        [],
+        "conf": {
+          "spark.kafka.clusters.base-cluster.auth.bootstrap.servers": "ccycloud-1.xhu-718.root.comops.site:9093,ccycloud-3.xhu-718.root.comops.site:9093,ccycloud-2.xhu-718.root.comops.site:9093"
+        }
+    },
+    "mounts":
+    []
+}

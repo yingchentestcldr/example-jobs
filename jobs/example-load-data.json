@@ -1,0 +1,39 @@
+{
+    "name": "example-load-data",
+    "type": "spark",
+    "mounts": [
+      {
+        "resourceName": "example-data"
+      },
+      {
+        "resourceName": "example-files"
+      }
+    ],
+    "spark": {
+      "file": "spark-load-data.py",
+      "args": [
+        "file:///app/mount/access-logs.txt",
+        "example-data/access-logs.txt"
+      ],
+      "driverMemory": "1g",
+      "driverCores": 1,
+      "executorMemory": "1g",
+      "executorCores": 1,
+      "conf": {
+        "cde.workspaceInit.enabled": "false",
+        "dex.safariEnabled": "false",
+        "spark.dynamicAllocation.maxExecutors": "50",
+        "spark.pyspark.python": "python3"
+      },
+      "logLevel": "INFO"
+    },
+    "retentionPolicy": "delete_after_run",
+    "schedule": {
+      "enabled": true,
+      "user": "cdp_xhu",
+      "cronExpression": "5 2 * * *",
+      "start": "2024-07-26T22:31:06.036Z",
+      "catchup": true
+    }
+}
+  
