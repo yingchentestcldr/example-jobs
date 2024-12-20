@@ -1,5 +1,5 @@
 {
-    "name": "test-session-kafka",
+    "name": "testying",
     "description": "",
     "type": "spark-connect",
     "ttl": "8h",
@@ -17,9 +17,8 @@
         [],
         "files":
         [],
-        "conf": {
-          "spark.kafka.clusters.base-cluster.auth.bootstrap.servers": "ccycloud-1.xhu-718.root.comops.site:9093,ccycloud-3.xhu-718.root.comops.site:9093,ccycloud-2.xhu-718.root.comops.site:9093"
-        }
+        "conf":
+        {}
     },
     "mounts":
     []

@@ -3,7 +3,7 @@
     "hidden": false,
     "git":
     {
-        "repository": "https://github.infra.cloudera.com/xhu/dex-example-jobs.git",
+        "repository": "https://github.com/yingchentestcldr/example-jobs.git",
         "branch": "master",
         "insecureSkipTLS": false
     }
